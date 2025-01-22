@@ -761,7 +761,7 @@ body {
               </div>
               <div>
                 <p class="info-label">Phone</p>
-                <p class="info-value">+1 (555) 123-4567</p>
+                <p class="info-value">+1 (555) 1123-4567</p>
               </div>
             </div>
             <div class="info-item">
@@ -839,6 +839,40 @@ body {
       </div>
     </div>
   </footer>
+<script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+<script>
+  // Initialize EmailJS with your public API key
+  emailjs.init('OymlcGTNt_4Zqme5g'); 
+
+  // Contact form handling
+  document.getElementById('contactForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    // Map form data to EmailJS template
+    const formData = {
+      to_name: 'Admin', // Static recipient name or dynamic if needed
+      from_name: document.getElementById('name').value,
+      message: document.getElementById('message').value
+    };
+
+    // Send the email using the provided service ID and template ID
+    emailjs
+      .send('service_8ulxxg9', 'template_gklspvw', formData)
+      .then(
+        function(response) {
+          console.log('Email sent successfully!', response.status, response.text);
+          alert('Thank you for your message. We will get back to you soon!');
+        },
+        function(error) {
+          console.error('Failed to send email:', error);
+          alert('Failed to send your message. Please try again later.');
+        }
+      );
+
+    // Reset the form after submission
+    this.reset();
+  });
+</script>
 
   <script>
       // Initialize Lucide icons
